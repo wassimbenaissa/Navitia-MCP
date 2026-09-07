@@ -1,0 +1,13 @@
+node_modules/
+dist/
+
+# Secrets — the Navitia token lives in the environment, never in the repo
+.env
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
+
+# Local Claude Code settings
+.claude/settings.local.json
