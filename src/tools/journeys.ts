@@ -14,8 +14,8 @@ const FRONTEND = "gormun";
 
 // Experimental Navitia feature flag: `boost_line(<line id>,<factor>)` nudges how
 // much a line is used without removing it from the results (which is what
-// forbidden_uris does). The factors are the API's own convention: 3 to favour a
-// line, 0.4 to show less of it.
+// forbidden_uris does). We use deliberately strong factors so the preference
+// actually shows in the ranking: 10 to favour a line, 0.1 to show less of it.
 const BOOST_FACTOR = { prefer: 10, avoid: 0.1 } as const;
 
 /**
