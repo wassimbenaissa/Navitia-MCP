@@ -14,9 +14,9 @@ const FRONTEND = "gormun";
 
 // Experimental Navitia feature flag: `boost_line(<line id>,<factor>)` nudges how
 // much a line is used without removing it from the results (which is what
-// forbidden_uris does). The factors are the API's own convention: 3 to favour a
-// line, 0.4 to show less of it.
-const BOOST_FACTOR = { prefer: 3, avoid: 0.4 } as const;
+// forbidden_uris does). We use deliberately strong factors so the preference
+// actually shows in the ranking: 10 to favour a line, 0.1 to show less of it.
+const BOOST_FACTOR = { prefer: 10, avoid: 0.1 } as const;
 
 /**
  * Build the `_features_flags[]` values for the requested line preferences, or
@@ -33,8 +33,8 @@ function boostLineFlags(prefer: string[] = [], avoid: string[] = []): string[] |
     if (!id.startsWith("line:")) {
       throw new Error(
         `prefer_lines and avoid_lines take line ids starting with "line:", got "${id}". ` +
-          "Look the line up with search_pt_objects and pass the id it returns — a line " +
-          "name or number is not an id.",
+        "Look the line up with search_pt_objects and pass the id it returns — a line " +
+        "name or number is not an id.",
       );
     }
     return `boost_line(${id},${factor})`;
