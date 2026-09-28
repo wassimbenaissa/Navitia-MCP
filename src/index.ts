@@ -6,6 +6,7 @@ import { registerJourneyTools } from "./tools/journeys.js";
 import { registerPlaceTools } from "./tools/places.js";
 import { registerDepartureTools } from "./tools/departures.js";
 import { registerScheduleTools } from "./tools/schedules.js";
+import { registerUiResources } from "./ui.js";
 
 const apiKey = process.env.NAVITIA_API_KEY;
 if (!apiKey) {
@@ -24,6 +25,7 @@ registerPlaceTools(server, client);
 registerJourneyTools(server, client);
 registerDepartureTools(server, client);
 registerScheduleTools(server, client);
+registerUiResources(server);
 
 const transport = new StdioServerTransport();
 await server.connect(transport);

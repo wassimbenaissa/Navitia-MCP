@@ -375,6 +375,9 @@ default applies.
 
 See [§10](#10-line-preferences) for the three preference levers.
 
+In a host that supports MCP Apps, the result also renders as the journeys
+widget — see the [README](../README.md#journeys-widget-mcp-apps).
+
 ### `next_departures` / `next_arrivals` — realtime boards
 
 Identical parameters; one reads departures, the other arrivals.
@@ -442,10 +445,13 @@ will be off by hours.
 A **journey** carries `departure` `arrival` `duration` `transfers` `walking`
 `type` (`best`, `rapid`, `comfort`…) `status` (a disruption flag such as
 `SIGNIFICANT_DELAYS`) `co2_g` `criteria_ranker` and `sections`. Each **section**
-carries `mode` `line` `network` `direction` `from` `to` `stops` `departure`
-`arrival` `duration`; `mode` falls back to the section type, so transfers,
-waits and bike/park legs stay identifiable. Waiting sections under a minute are
-dropped as noise.
+carries `mode` `line` `network` `color` `text_color` `direction` `from` `to`
+`stops` `departure` `arrival` `duration` `realtime?`; `mode` falls back to the
+section type, so transfers, waits and bike/park legs stay identifiable. `color`
+and `text_color` are the line's own badge colours as `#RRGGBB`, and `realtime`
+is `true` on a leg timed from live data. Waiting sections under a minute are
+dropped as noise. `disruptions` lists each distinct disruption once (Navitia
+repeats them per impacted object), with its messages flattened to plain text.
 
 Two conventions worth knowing:
 
