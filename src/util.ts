@@ -2,6 +2,7 @@ const MAX_RESULT_CHARS = 50_000;
 
 type ToolResult = {
   content: { type: "text"; text: string }[];
+  structuredContent?: Record<string, unknown>;
   isError?: boolean;
 };
 
@@ -13,6 +14,14 @@ export function jsonResult(data: unknown): ToolResult {
       "\n... (result truncated — use 'count' or narrower filters to reduce the response)";
   }
   return { content: [{ type: "text", text }] };
+}
+
+/**
+ * For tools with a UI view: the same text as jsonResult for the model, plus the
+ * object itself as `structuredContent`, which is what the view renders.
+ */
+export function appResult(data: Record<string, unknown>): ToolResult {
+  return { ...jsonResult(data), structuredContent: data };
 }
 
 /** Wrap a tool handler so API failures come back as readable tool errors. */

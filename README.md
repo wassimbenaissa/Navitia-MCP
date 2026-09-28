@@ -103,6 +103,16 @@ Time-sensitive responses (`plan_journey`, `next_departures`, `next_arrivals`, `s
 
 Each journey also carries Navitia's `criteria_ranker` when the API supplies it — that journey's 1-based rank for `asap`, `less_transfers`, `less_walking` and `reliability`, 1 being the best on that criterion. It is what the line-preference re-ordering sorts on, and a client can reuse it to tag itineraries.
 
+Journey sections carry the line's badge colours (`color`, `text_color`, as `#RRGGBB`) and `realtime: true` when timed from live data. Journey disruptions are deduplicated — Navitia repeats each one per impacted object — and their messages flattened to plain text.
+
+## Journeys widget (MCP Apps)
+
+In hosts that support [MCP Apps](https://github.com/modelcontextprotocol/ext-apps) — Claude on the web and Desktop among them — `plan_journey` results render as an interactive itinerary list in the conversation. The tool points at the `ui://navitia/journeys.html` resource through `_meta.ui.resourceUri` and returns its payload as `structuredContent` next to the usual text, so hosts without MCP Apps (Claude Code in a terminal, for one) keep getting text only.
+
+The widget shows one row per itinerary — duration, times, the lines taken, transfers and walking — and the steps of the row you click; disruptions shrink to one expandable line. It leaves out itineraries with an incoherent leg (one that ends before it starts) and walk-only options more than twice as long as the quickest public-transport one. The model still receives every journey.
+
+Its source is in [`ui/journeys/`](ui/journeys); `npm run build` bundles it into the single file `dist/ui/journeys.html` the server serves.
+
 [`prompts/agent-system-prompt.md`](prompts/agent-system-prompt.md) is a ready-to-use strict system prompt for an agent driving this server: it specifies the board layouts (departure boards, journey chains, timetables), the anti-fabrication rules, and the id-resolution protocol.
 
 ## Development
@@ -110,7 +120,12 @@ Each journey also carries Navitia's `criteria_ranker` when the API supplies it �
 ```bash
 NAVITIA_API_KEY=your-token npm run dev          # run from source
 npx @modelcontextprotocol/inspector node dist/index.js   # interactive testing
+npm run preview:ui                               # build .preview/ to work on the widget
+python3 -m http.server 4173 -d .preview          # …then open http://localhost:4173
+npm run typecheck:ui                             # type-check the widget sources
 ```
+
+The preview is a minimal MCP Apps host: it mounts the widget in a sandboxed iframe, as Claude does, and replays the scenarios in [`ui/preview/fixtures/`](ui/preview/fixtures) (a real response, no result, an error, still loading), in light or dark theme and at chat or phone width.
 
 See [docs/USAGE.md](docs/USAGE.md) for the full guide, and
 [docs/USAGE.md#12-troubleshooting](docs/USAGE.md#12-troubleshooting) when something returns nothing.

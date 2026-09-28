@@ -52,6 +52,42 @@ export function clean<T extends Record<string, any>>(obj: T): Partial<T> {
   return out as Partial<T>;
 }
 
+/** Navitia line colour "FFCD00" -> "#FFCD00"; anything else is dropped. */
+function hexColor(value?: string): string | undefined {
+  return value && /^[0-9a-f]{6}$/i.test(value) ? `#${value.toUpperCase()}` : undefined;
+}
+
+const HTML_ENTITIES: Record<string, string> = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  apos: "'",
+  nbsp: " ",
+};
+
+function fromCodePoint(code: number): string {
+  return code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : "";
+}
+
+/**
+ * Disruption messages sometimes arrive as HTML (<p>, <br>, <a>, numeric
+ * entities). Flatten them to plain text: neither a model nor a UI rendering
+ * text should see the markup.
+ */
+export function stripHtml(text: string): string {
+  return text
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/p>/gi, "\n")
+    .replace(/<[^>]*>/g, "")
+    .replace(/&#(\d+);/g, (_, n) => fromCodePoint(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, n) => fromCodePoint(parseInt(n, 16)))
+    .replace(/&(amp|lt|gt|quot|apos|nbsp);/g, (_, name) => HTML_ENTITIES[name])
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 function coord(c?: { lon?: string; lat?: string }): string | undefined {
   return c?.lon && c?.lat ? `${c.lon};${c.lat}` : undefined;
 }
@@ -116,6 +152,9 @@ function formatSection(s: any) {
     mode: s.mode ?? di?.commercial_mode ?? s.type,
     line: di?.code ?? di?.name,
     network: di?.network,
+    // The line's own badge colours, for clients that draw it.
+    color: hexColor(di?.color),
+    text_color: hexColor(di?.text_color),
     direction: di?.direction,
     from: s.from?.name,
     to: s.to?.name,
@@ -123,6 +162,7 @@ function formatSection(s: any) {
     departure: fromNavitiaDt(s.departure_date_time),
     arrival: fromNavitiaDt(s.arrival_date_time),
     duration: formatDuration(s.duration),
+    realtime: s.data_freshness === "realtime" ? true : undefined,
   });
 }
 
@@ -166,13 +206,20 @@ export function formatJourneys(data: any, opts: { rankBy?: RankCriterion } = {})
     }),
   );
   if (journeys.length === 0) return { message: "No journeys found." };
-  const disruptions = (data?.disruptions ?? []).map((d: any) =>
-    clean({
-      severity: d.severity?.name,
-      cause: d.cause,
-      messages: d.messages?.map((m: any) => m.text).slice(0, 2),
-    }),
-  );
+  // Navitia repeats a disruption once per impacted object, so one request can
+  // carry dozens of identical entries: keep each distinct one once.
+  const seen = new Set<string>();
+  const disruptions = [];
+  for (const d of data?.disruptions ?? []) {
+    const messages: string[] = (d.messages ?? [])
+      .map((m: any) => (m.text ? stripHtml(m.text) : ""))
+      .filter(Boolean)
+      .slice(0, 2);
+    const key = JSON.stringify([d.severity?.name, d.cause, [...messages].sort()]);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    disruptions.push(clean({ severity: d.severity?.name, cause: d.cause, messages }));
+  }
   return clean({ now: contextNow(data), ordered_by: opts.rankBy, journeys, disruptions });
 }
 

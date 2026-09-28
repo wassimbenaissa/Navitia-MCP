@@ -1,0 +1,520 @@
+{
+ "_note": "Fixture for the preview host. Journeys and disruptions are the real plan_journey response of 2026-09-28 11:36 (disruptions deduplicated as src/format.ts now does). Line colours were added by hand: that response predates the color/text_color fields.",
+ "fixtures": [
+  {
+   "label": "Châtelet les Halles → Passage de l'Arche (réponse réelle du 28/09, 11:36)",
+   "arguments": {
+    "from": "stop_area:IDFM:474151",
+    "to": "2.237;48.892",
+    "max_nb_journeys": 4
+   },
+   "result": {
+    "content": [
+     {
+      "type": "text",
+      "text": "(texte destiné au modèle — la vue lit structuredContent)"
+     }
+    ],
+    "structuredContent": {
+     "now": "2026-09-28T11:36:28",
+     "journeys": [
+      {
+       "departure": "2026-09-28T11:41:47",
+       "arrival": "2026-09-28T12:16:58",
+       "duration": "35min",
+       "transfers": 2,
+       "walking": "8min",
+       "type": "best",
+       "co2_g": 46,
+       "criteria_ranker": {
+        "asap": 1,
+        "less_transfers": 1,
+        "less_walking": 2,
+        "reliability": 1
+       },
+       "sections": [
+        {
+         "mode": "walking",
+         "from": "Châtelet les Halles (Paris)",
+         "to": "Châtelet les Halles (Paris)",
+         "departure": "2026-09-28T11:41:47",
+         "arrival": "2026-09-28T11:41:47",
+         "duration": "0s"
+        },
+        {
+         "mode": "RER",
+         "line": "B",
+         "network": "RER",
+         "color": "#5291CE",
+         "text_color": "#FFFFFF",
+         "direction": "Massy - Palaiseau (Massy)",
+         "from": "Châtelet les Halles (Paris)",
+         "to": "Saint-Michel Notre-Dame (Paris)",
+         "stops": 1,
+         "departure": "2026-09-28T11:41:47",
+         "arrival": "2026-09-28T11:43:09",
+         "duration": "1min"
+        },
+        {
+         "mode": "waiting",
+         "departure": "2026-09-28T11:43:09",
+         "arrival": "2026-09-28T11:45:09",
+         "duration": "2min"
+        },
+        {
+         "mode": "RER",
+         "line": "B",
+         "network": "RER",
+         "color": "#5291CE",
+         "text_color": "#FFFFFF",
+         "direction": "Mitry - Claye (Mitry-Mory)",
+         "from": "Saint-Michel Notre-Dame (Paris)",
+         "to": "Châtelet les Halles (Paris)",
+         "stops": 1,
+         "departure": "2026-09-28T11:45:09",
+         "arrival": "2026-09-28T11:46:29",
+         "duration": "1min"
+        },
+        {
+         "mode": "walking",
+         "from": "Châtelet les Halles (Paris)",
+         "to": "Châtelet (Paris)",
+         "departure": "2026-09-28T11:46:29",
+         "arrival": "2026-09-28T11:52:30",
+         "duration": "6min"
+        },
+        {
+         "mode": "waiting",
+         "departure": "2026-09-28T11:52:30",
+         "arrival": "2026-09-28T11:55:32",
+         "duration": "3min"
+        },
+        {
+         "mode": "Métro",
+         "line": "1",
+         "network": "RATP",
+         "color": "#FFCD00",
+         "text_color": "#000000",
+         "direction": "La Défense (Grande Arche) (Puteaux)",
+         "from": "Châtelet (Paris)",
+         "to": "La Défense (Grande Arche) (Puteaux)",
+         "stops": 14,
+         "departure": "2026-09-28T11:55:32",
+         "arrival": "2026-09-28T12:15:07",
+         "duration": "20min"
+        },
+        {
+         "mode": "walking",
+         "from": "La Défense (Grande Arche) (Puteaux)",
+         "to": "Passage de l'Arche (Puteaux)",
+         "departure": "2026-09-28T12:15:07",
+         "arrival": "2026-09-28T12:16:58",
+         "duration": "2min"
+        }
+       ]
+      },
+      {
+       "departure": "2026-09-28T11:40:30",
+       "arrival": "2026-09-28T12:16:58",
+       "duration": "36min",
+       "transfers": 2,
+       "walking": "10min",
+       "type": "comfort",
+       "co2_g": 33,
+       "criteria_ranker": {
+        "asap": 1,
+        "less_transfers": 1,
+        "less_walking": 3,
+        "reliability": 2
+       },
+       "sections": [
+        {
+         "mode": "walking",
+         "from": "Châtelet les Halles (Paris)",
+         "to": "Châtelet les Halles (Paris)",
+         "departure": "2026-09-28T11:40:30",
+         "arrival": "2026-09-28T11:40:30",
+         "duration": "0s"
+        },
+        {
+         "mode": "RER",
+         "line": "D",
+         "network": "RER",
+         "color": "#00814F",
+         "text_color": "#FFFFFF",
+         "direction": "Corbeil-Essonnes (Corbeil-Essonnes)",
+         "from": "Châtelet les Halles (Paris)",
+         "to": "Châtelet les Halles (Paris)",
+         "stops": 0,
+         "departure": "2026-09-28T11:40:30",
+         "arrival": "2026-09-28T11:39:30",
+         "duration": "-60s"
+        },
+        {
+         "mode": "walking",
+         "from": "Châtelet les Halles (Paris)",
+         "to": "Rivoli - Pont Neuf (Paris)",
+         "departure": "2026-09-28T11:39:30",
+         "arrival": "2026-09-28T11:45:31",
+         "duration": "6min"
+        },
+        {
+         "mode": "waiting",
+         "departure": "2026-09-28T11:45:31",
+         "arrival": "2026-09-28T11:48:00",
+         "duration": "2min"
+        },
+        {
+         "mode": "Bus",
+         "line": "69",
+         "network": "RATP",
+         "direction": "Champs de Mars (Paris)",
+         "from": "Rivoli - Pont Neuf (Paris)",
+         "to": "Rivoli - Pont Neuf (Paris)",
+         "stops": 0,
+         "departure": "2026-09-28T11:48:00",
+         "arrival": "2026-09-28T11:48:00",
+         "duration": "0s"
+        },
+        {
+         "mode": "walking",
+         "from": "Rivoli - Pont Neuf (Paris)",
+         "to": "Châtelet (Paris)",
+         "departure": "2026-09-28T11:48:00",
+         "arrival": "2026-09-28T11:50:34",
+         "duration": "3min"
+        },
+        {
+         "mode": "waiting",
+         "departure": "2026-09-28T11:50:34",
+         "arrival": "2026-09-28T11:55:32",
+         "duration": "5min"
+        },
+        {
+         "mode": "Métro",
+         "line": "1",
+         "network": "RATP",
+         "color": "#FFCD00",
+         "text_color": "#000000",
+         "direction": "La Défense (Grande Arche) (Puteaux)",
+         "from": "Châtelet (Paris)",
+         "to": "La Défense (Grande Arche) (Puteaux)",
+         "stops": 14,
+         "departure": "2026-09-28T11:55:32",
+         "arrival": "2026-09-28T12:15:07",
+         "duration": "20min"
+        },
+        {
+         "mode": "walking",
+         "from": "La Défense (Grande Arche) (Puteaux)",
+         "to": "Passage de l'Arche (Puteaux)",
+         "departure": "2026-09-28T12:15:07",
+         "arrival": "2026-09-28T12:16:58",
+         "duration": "2min"
+        }
+       ]
+      },
+      {
+       "departure": "2026-09-28T11:38:47",
+       "arrival": "2026-09-28T12:16:58",
+       "duration": "38min",
+       "transfers": 2,
+       "walking": "5min",
+       "type": "comfort",
+       "co2_g": 111,
+       "criteria_ranker": {
+        "asap": 1,
+        "less_transfers": 1,
+        "less_walking": 1,
+        "reliability": 2
+       },
+       "sections": [
+        {
+         "mode": "walking",
+         "from": "Châtelet les Halles (Paris)",
+         "to": "Châtelet les Halles (Paris)",
+         "departure": "2026-09-28T11:38:47",
+         "arrival": "2026-09-28T11:38:47",
+         "duration": "0s"
+        },
+        {
+         "mode": "RER",
+         "line": "B",
+         "network": "RER",
+         "color": "#5291CE",
+         "text_color": "#FFFFFF",
+         "direction": "Saint-Rémy-lès-Chevreuse (Saint-Rémy-lès-Chevreuse)",
+         "from": "Châtelet les Halles (Paris)",
+         "to": "Saint-Michel Notre-Dame (Paris)",
+         "stops": 1,
+         "departure": "2026-09-28T11:38:47",
+         "arrival": "2026-09-28T11:40:09",
+         "duration": "1min"
+        },
+        {
+         "mode": "walking",
+         "from": "Saint-Michel Notre-Dame (Paris)",
+         "to": "Saint-Michel - Saint-Germain (Paris)",
+         "departure": "2026-09-28T11:40:09",
+         "arrival": "2026-09-28T11:41:37",
+         "duration": "1min"
+        },
+        {
+         "mode": "waiting",
+         "departure": "2026-09-28T11:41:37",
+         "arrival": "2026-09-28T11:44:00",
+         "duration": "2min"
+        },
+        {
+         "mode": "Bus",
+         "line": "21",
+         "network": "RATP",
+         "direction": "Porte de Saint-Ouen - Hôpital Bichat (Paris)",
+         "from": "Saint-Michel - Saint-Germain (Paris)",
+         "to": "Rivoli - Châtelet (Paris)",
+         "stops": 2,
+         "departure": "2026-09-28T11:44:00",
+         "arrival": "2026-09-28T11:50:00",
+         "duration": "6min"
+        },
+        {
+         "mode": "walking",
+         "from": "Rivoli - Châtelet (Paris)",
+         "to": "Châtelet (Paris)",
+         "departure": "2026-09-28T11:50:00",
+         "arrival": "2026-09-28T11:51:40",
+         "duration": "2min"
+        },
+        {
+         "mode": "waiting",
+         "departure": "2026-09-28T11:51:40",
+         "arrival": "2026-09-28T11:55:32",
+         "duration": "4min"
+        },
+        {
+         "mode": "Métro",
+         "line": "1",
+         "network": "RATP",
+         "color": "#FFCD00",
+         "text_color": "#000000",
+         "direction": "La Défense (Grande Arche) (Puteaux)",
+         "from": "Châtelet (Paris)",
+         "to": "La Défense (Grande Arche) (Puteaux)",
+         "stops": 14,
+         "departure": "2026-09-28T11:55:32",
+         "arrival": "2026-09-28T12:15:07",
+         "duration": "20min"
+        },
+        {
+         "mode": "walking",
+         "from": "La Défense (Grande Arche) (Puteaux)",
+         "to": "Passage de l'Arche (Puteaux)",
+         "departure": "2026-09-28T12:15:07",
+         "arrival": "2026-09-28T12:16:58",
+         "duration": "2min"
+        }
+       ]
+      },
+      {
+       "departure": "2026-09-28T11:36:28",
+       "arrival": "2026-09-28T14:39:59",
+       "duration": "3h04",
+       "transfers": 0,
+       "walking": "3h04",
+       "type": "non_pt_walk",
+       "sections": [
+        {
+         "mode": "walking",
+         "from": "Châtelet les Halles (Paris)",
+         "to": "Passage de l'Arche (Puteaux)",
+         "departure": "2026-09-28T11:36:28",
+         "arrival": "2026-09-28T14:39:59",
+         "duration": "3h04"
+        }
+       ]
+      }
+     ],
+     "disruptions": [
+      {
+       "severity": "perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "Panne d'un ascenseur",
+        "LA DEFENSE Panne de l'ascenseur situé Rue Carpeaux <> Quai T2, direction Issy Val de Seine, jusqu'au 2026-11-30"
+       ]
+      },
+      {
+       "severity": "perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "Panne d'un ascenseur",
+        "LA DEFENSE Panne de l'ascenseur situé Rue Carpeaux <> Quai T2, direction Issy Val de Seine, jusqu'au 2026-04-03"
+       ]
+      },
+      {
+       "severity": "perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "Panne d'un ascenseur",
+        "LA DEFENSE Panne de l'ascenseur situé Gare Routière <> Sortie G <> Salle d'accès"
+       ]
+      },
+      {
+       "severity": "perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "Panne d'un ascenseur",
+        "LA DEFENSE Panne de l'ascenseur situé Salle d'accès zone SNCF Sud et Ouest <> Tête Quais 2/B, direction Ouest, jusqu'au 2026-07-23"
+       ]
+      },
+      {
+       "severity": "perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "Panne d'un ascenseur",
+        "St Michel Notre Dame Panne de l'ascenseur situé Sortie St Andre des arts <> tête quai 1, direction Bagneux – Lucie Aubrac"
+       ]
+      },
+      {
+       "severity": "perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "Panne d'un ascenseur",
+        "LA DEFENSE Panne de l'ascenseur situé Rue Carpeaux <> Quai T2, direction Issy Val de Seine, jusqu'au 2026-06-30"
+       ]
+      },
+      {
+       "severity": "perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "Panne d'un ascenseur",
+        "LA DEFENSE Panne de l'ascenseur situé Salle d'accès zone SNCF Sud et Ouest <> Tête Quais 2/B, direction Ouest, jusqu'au 2026-07-12"
+       ]
+      },
+      {
+       "severity": "perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "Panne d'un ascenseur",
+        "LA DEFENSE Panne de l'ascenseur situé Couloir T2 quai central Correspondance"
+       ]
+      },
+      {
+       "severity": "perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "Panne d'un ascenseur",
+        "Châtelet Les Halles Panne de l'ascenseur situé Salle d'accès <> Quai 3, direction RER D Nord"
+       ]
+      },
+      {
+       "severity": "perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "Panne d'un ascenseur",
+        "LA DEFENSE Panne de l'ascenseur situé Salle d'accès <> Parvis sortie A"
+       ]
+      },
+      {
+       "severity": "perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "Panne d'un ascenseur",
+        "LA DEFENSE Panne de l'ascenseur situé Tramway T2 <> Salle d'accès, direction Issy Val de Seine, jusqu'au 2026-08-23"
+       ]
+      },
+      {
+       "severity": "information",
+       "cause": "information",
+       "messages": [
+        "Ligne D : forte affluence\ntest TN.com pour l'info trafic.\n\nMotif : tauto",
+        "Ligne D : forte affluence"
+       ]
+      },
+      {
+       "severity": "perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "Panne d'un ascenseur",
+        "Châtelet Panne de l'ascenseur situé Salle d'accès <> Quai 1, direction Olympiades"
+       ]
+      },
+      {
+       "severity": "perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "Panne d'un ascenseur",
+        "LA DEFENSE Panne de l'ascenseur situé Rue Carpeaux <> Quai T2, direction Issy Val de Seine"
+       ]
+      },
+      {
+       "severity": "perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "Panne d'un ascenseur",
+        "LA DEFENSE Panne de l'ascenseur situé Rue Carpeaux <> Quai T2, direction Issy Val de Seine, jusqu'au 2026-06-01"
+       ]
+      },
+      {
+       "severity": "perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "Panne d'un ascenseur",
+        "LA DEFENSE Panne de l'ascenseur situé Couloir coupole (ascenseur 2), direction Est"
+       ]
+      },
+      {
+       "severity": "Perturbée",
+       "cause": "perturbation",
+       "messages": [
+        "L’offre de transport du RER D est réduite pendant plusieurs mois.\n\nPour préparer votre trajet et avant de vous rendre en gare, vérifiez les horaires des trains qui circulent en vous rendant dans la rubrique recherche d’itinéraire de votre application.\n\nAttention : les horaires du calculateur d’itinéraire tiennent compte de ces modifications à partir de J-15 avant votre date de voyage.\n\nRetrouvez plus d’informations sur le blog du RER D :\nhttps://maligned.transilien.com/2026/08/21/reduction-de-loffre-rer-d-24-aout/\nMotif : capacité de maintenance des trains temporairement réduite (création de nouveaux ateliers de maintenance)",
+        "RER D : allègement de l’offre de transport"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "label": "Aucun itinéraire",
+   "arguments": {
+    "from": "stop_area:IDFM:474151",
+    "to": "2.237;48.892"
+   },
+   "result": {
+    "content": [
+     {
+      "type": "text",
+      "text": "(texte destiné au modèle — la vue lit structuredContent)"
+     }
+    ],
+    "structuredContent": {
+     "message": "No journeys found."
+    }
+   }
+  },
+  {
+   "label": "Erreur de l'API (exemple)",
+   "arguments": {
+    "from": "stop_area:IDFM:474151",
+    "to": "2.237;48.892"
+   },
+   "result": {
+    "isError": true,
+    "content": [
+     {
+      "type": "text",
+      "text": "Error: Rate limit exceeded (429). Wait a moment before retrying."
+     }
+    ]
+   }
+  },
+  {
+   "label": "En attente du résultat",
+   "arguments": {
+    "from": "stop_area:IDFM:474151",
+    "to": "2.237;48.892"
+   }
+  }
+ ]
+}

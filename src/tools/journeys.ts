@@ -1,8 +1,10 @@
 import { z } from "zod";
+import { registerAppTool } from "@modelcontextprotocol/ext-apps/server";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { NavitiaClient } from "../client.js";
 import { formatJourneys, toNavitiaDt } from "../format.js";
-import { jsonResult, safe } from "../util.js";
+import { JOURNEYS_UI_URI } from "../ui.js";
+import { appResult, safe } from "../util.js";
 
 const placeDescription =
   "Either 'lon;lat' coordinates (e.g. '2.3522;48.8566') or a Navitia object id " +
@@ -42,7 +44,8 @@ function boostLineFlags(prefer: string[] = [], avoid: string[] = []): string[] |
 }
 
 export function registerJourneyTools(server: McpServer, client: NavitiaClient) {
-  server.registerTool(
+  registerAppTool(
+    server,
     "plan_journey",
     {
       title: "Plan a journey",
@@ -95,6 +98,8 @@ export function registerJourneyTools(server: McpServer, client: NavitiaClient) {
             'For "I would like to avoid metro 14 without ruling it out".',
           ),
       },
+      // Hosts that support MCP Apps show the journeys view with the result.
+      _meta: { ui: { resourceUri: JOURNEYS_UI_URI } },
     },
     safe(async (args) => {
       const featuresFlags = boostLineFlags(args.prefer_lines, args.avoid_lines);
@@ -112,7 +117,7 @@ export function registerJourneyTools(server: McpServer, client: NavitiaClient) {
       });
       // Boosting changes what "best" means, so the API's default order no longer
       // reflects the request: with line preferences on, reliability is the key.
-      return jsonResult(formatJourneys(data, { rankBy: featuresFlags ? "reliability" : undefined }));
+      return appResult(formatJourneys(data, { rankBy: featuresFlags ? "reliability" : undefined }));
     }),
   );
 }

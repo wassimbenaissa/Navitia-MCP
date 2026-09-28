@@ -1,5 +1,6 @@
 node_modules/
 dist/
+.preview/
 
 # Secrets — the Navitia token lives in the environment, never in the repo
 .env

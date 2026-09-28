@@ -8,8 +8,11 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
-    "dev": "tsx src/index.ts",
+    "build": "tsc && npm run build:ui",
+    "build:ui": "node scripts/build-ui.mjs",
+    "typecheck:ui": "tsc -p ui/tsconfig.json",
+    "preview:ui": "node scripts/build-ui.mjs --preview",
+    "dev": "node scripts/build-ui.mjs && tsx src/index.ts",
     "start": "node dist/index.js",
     "prepublishOnly": "npm run build"
   },
@@ -28,11 +31,13 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.0",
+    "@modelcontextprotocol/ext-apps": "^1.7.5",
+    "@modelcontextprotocol/sdk": "^1.30.1",
     "zod": "^3.24.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "esbuild": "^0.28.2",
     "tsx": "^4.19.0",
     "typescript": "^5.7.0"
   }
